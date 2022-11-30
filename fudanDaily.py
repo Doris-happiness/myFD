@@ -41,7 +41,7 @@ def get_session(_login_info):
 
 
 def get_historical_info(_session):
-    response = session.get(get_info_url)
+    response = _session.get(get_info_url)
     return json.loads(response.text)["d"]
 
 
@@ -150,7 +150,7 @@ def main(USERNAME, PASSWORD):
 
             if payload.get("date") == get_today_date():
                 notify(f"今日已打卡：{payload.get('area')}", f"今日已打卡：{payload_str}")
-                sys.exit()
+                return
             
             payload.update(
                 {
