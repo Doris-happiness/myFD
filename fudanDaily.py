@@ -114,11 +114,7 @@ def notify(_title, _message=None):
         print(f"发送通知失败：{_response.status_code}")
 
 
-if __name__ == "__main__":
-    if not USERNAME or not PASSWORD:
-        notify("请正确配置用户名和密码！")
-        sys.exit()
-
+def main(USERNAME, PASSWORD):
     login_info = {
         "username": USERNAME,
         "password": PASSWORD
@@ -184,3 +180,13 @@ if __name__ == "__main__":
 
     except Exception as e:
         notify("打卡失败，请手动打卡", str(e))
+if __name__ == "__main__":
+    if not USERNAME or not PASSWORD:
+        notify("请正确配置用户名和密码！")
+        sys.exit()
+        
+    USERNAME = USERNAME.split('&&')
+    PASSWORD = PASSWORD.split('&&')
+    for i in range(len(USERNAME)):
+        main(USERNAME[i], PASSWORD[i])
+        
